@@ -6,13 +6,17 @@ body {
 }
 
 div.suit-container {
-	min-height: 180px;
-	width: 48%;
+	height: 220px;
+	width: 500px;
 	float: left;
+	background: #ccc;
+	padding: 0 5px;
+	margin: 10px;
 }
 
 div.cards {
 	position: relative;
+	padding: 5px 0;
 }
 
 div.card {

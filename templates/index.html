@@ -5,27 +5,61 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-	<form id="cardForm" action="/process" method="post">
-		<div id="responseMessage" class="response-message"></div>
-		{% for suit in suits %}
-	    <div class="suit-container">
-	        <h2>{{ suit }}s</h2>
-    		<div class="cards">
+	<div id="pokerContainer">
+	    <div id="howToPlay">
+	    	<h4>Royal Flush</h4>
+		    <p>A, K, Q, J, 10, all of the same suit.</p>
 
-	        {% for card in cards %}
-	            {% if card.suit == suit %}
-		        <div class="card" id="card-{{ card.id }}" style="left: {{30 * card.number}}px">
-		            <input type="checkbox" name="selected_cards" data-name="card-{{ card.id }}" value="{{ card.id }}">
-		            <!-- <img src="{{ url_for('static', filename='back/back.png') }}" alt="card {{card.id}}" /> -->
-		        	<img src="{{ url_for('static', filename=card.filename) }}" type="image/svg+xml" width="100">
-		        </div>
-                {% endif %}
-	        {% endfor %}
-        	</div>
-        </div>
-        {% endfor %}
-        <input type="submit" value="Submit" style="display: none;">
-    </form>
+			<h4>Straight Flush</h4>
+		    <p>Five consecutive cards of the same suit.</p>
+
+			<h4>Four of a Kind (Quads)</h4>
+		    <p>Four cards of the same rank.</p>
+
+			<h4>Full House</h4>
+		    <p>Three of a kind plus a pair.</p>
+
+			<h4>Flush</h4>
+		    <p>Five cards of the same suit, not in sequence.</p>
+
+			<h4>Straight</h4>
+		    <p>Five consecutive cards of different suits.</p>
+
+			<h4>Three of a Kind (Trips or Set)</h4>
+		    <p>Three cards of the same rank.</p>
+
+			<h4>Two Pair</h4>
+		    <p>Two different pairs.</p>
+
+			<h4>One Pair</h4>
+		    <p>Two cards of the same rank.</p>
+	    </div>
+	    <div id="cardFormContainer">
+			<form id="cardForm" action="/process" method="post">
+				<div id="responseMessage" class="response-message">Please select 5 cards.</div>
+				<div id="suits">
+					{% for suit in suits %}
+				    <div class="suit-container">
+				        <h2>{{ suit }}s</h2>
+			    		<div class="cards">
+
+				        {% for card in cards %}
+				            {% if card.suit == suit %}
+					        <div class="card" id="card-{{ card.id }}" style="left: {{30 * (card.number-1)}}px">
+					            <input type="checkbox" name="selected_cards" data-name="card-{{ card.id }}" value="{{ card.id }}">
+					            <!-- <img src="{{ url_for('static', filename='back/back.png') }}" alt="card {{card.id}}" /> -->
+					        	<img src="{{ url_for('static', filename=card.filename) }}" type="image/svg+xml" width="100">
+					        </div>
+			                {% endif %}
+				        {% endfor %}
+			        	</div>
+			        </div>
+			        {% endfor %}
+			    </div>
+		        <input type="submit" value="Submit" style="display: none;">
+		    </form>
+		</div>
+	</div>
 </body>
 <script src="{{ url_for('static', filename='js/card-selection.js') }}"></script>
 </html>

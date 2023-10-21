@@ -64,6 +64,9 @@ function submitFormAjax() {
     .then(data => {
         // Update the div with the returned message
         responseMessageDiv.textContent = data.message;
+        if (data.winning_set) {
+        	responseMessageDiv.textContent += ' ' + data.winning_set + '!';
+        }
         
         // Optionally, you can add or remove classes based on the status to style the message
         if (data.status === "success") {

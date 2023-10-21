@@ -6,16 +6,24 @@
 </head>
 <body>
 	<form id="cardForm" action="/process" method="post">
-    	<div class="cards">
+		<div id="responseMessage" class="response-message"></div>
+		{% for suit in suits %}
+	    <div class="suit-container">
+	        <h2>{{ suit }}s</h2>
+    		<div class="cards">
 
 	        {% for card in cards %}
-	        <div class="card" id="card-{{ card.id }}" style="left: {{30 * card.id}}px">
-	            <input type="checkbox" name="selected_cards" data-name="card-{{ card.id }}" value="{{ card.id }}">
-	            <!-- <img src="{{ url_for('static', filename='back/back.png') }}" alt="card {{card.id}}" /> -->
-	        	<embed src="{{ url_for('static', filename=card.filename) }}" type="image/svg+xml" width="100">
-	        </div>
+	            {% if card.suit == suit %}
+		        <div class="card" id="card-{{ card.id }}" style="left: {{30 * card.number}}px">
+		            <input type="checkbox" name="selected_cards" data-name="card-{{ card.id }}" value="{{ card.id }}">
+		            <!-- <img src="{{ url_for('static', filename='back/back.png') }}" alt="card {{card.id}}" /> -->
+		        	<img src="{{ url_for('static', filename=card.filename) }}" type="image/svg+xml" width="100">
+		        </div>
+                {% endif %}
 	        {% endfor %}
+        	</div>
         </div>
+        {% endfor %}
         <input type="submit" value="Submit" style="display: none;">
     </form>
 </body>

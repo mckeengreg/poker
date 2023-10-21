@@ -4,6 +4,8 @@ from poker_hands import *
 
 import random
 import os
+import sys
+import io
 import secrets
 
 
@@ -104,10 +106,6 @@ def is_winning_set(selected_card_ids):
         return PokerHand.TWO_PAIRS
     if check_one_pairs(hand):
         return PokerHand.ONE_PAIR
-    if check_two_pair(hand):
-        return PokerHand.TWO_PAIR
-    if check_pair(hand):
-        return PokerHand.PAIR
     return False
 
 
@@ -131,6 +129,23 @@ def process_card_ids_into_hand(ids):
     return hand
 
 
+@app.route('/run-tests')
+def run_tests():
+    # Redirect stdout to capture the test results
+    old_stdout = sys.stdout
+    new_stdout = io.StringIO()
+    sys.stdout = new_stdout
+
+    # Import and run the tests
+    from test_poker_hands import run_tests as execute_tests
+    execute_tests()
+
+    # Reset stdout to its original state
+    sys.stdout = old_stdout
+    test_results = new_stdout.getvalue()
+
+    return render_template('test_results.html', test_results=test_results)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-    print(deck)

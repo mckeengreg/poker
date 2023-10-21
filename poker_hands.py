@@ -6,7 +6,6 @@ card_order_dict = {"2":2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "T":1
 def check_royal_flush(hand):
     if check_straight_flush(hand):
         values = [i[0] for i in hand]
-        print(values)
         if set(values) == set(["A", "K", "Q", "J", "T"]):
             return True
         return False

@@ -12,6 +12,10 @@ chmod +x ./run.sh
 ./run.bat
 ```
 
+# Running Tests
+```
+python3 -m unittest -v test_poker_hands.py
+```
 
 
 # Cards License

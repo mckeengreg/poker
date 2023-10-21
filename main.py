@@ -44,7 +44,6 @@ deck = generate_deck()
 
 @app.route('/')
 def index():
-    print(deck)
     # A dictionary to map numbers to their corresponding names
     number_to_name = {
         11: 'JACK',
@@ -72,7 +71,6 @@ def index():
 @app.route('/process', methods=['POST'])
 def process():
     selected_card_ids = request.form.getlist('selected_cards')
-    print(selected_card_ids)
     
     if len(selected_card_ids) != 5:
         return jsonify(status="error", message="Please select 5 cards.")
@@ -86,7 +84,6 @@ def process():
 
 def is_winning_set(selected_card_ids):
     hand = process_card_ids_into_hand(selected_card_ids)
-    print(hand)
     # Define your logic to determine if the given cards form a winning set
     if check_royal_flush(hand):
         return PokerHand.ROYAL_FLUSH

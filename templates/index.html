@@ -48,7 +48,6 @@
 				            {% if card.suit == suit %}
 					        <div class="card" id="card-{{ card.id }}" style="left: {{30 * (card.number-1)}}px">
 					            <input type="checkbox" name="selected_cards" data-name="card-{{ card.id }}" value="{{ card.id }}">
-					            <!-- <img src="{{ url_for('static', filename='back/back.png') }}" alt="card {{card.id}}" /> -->
 					        	<img src="{{ url_for('static', filename=card.filename) }}" type="image/svg+xml" width="100">
 					        </div>
 			                {% endif %}

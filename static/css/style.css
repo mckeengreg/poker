@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+div.cards {
+	margin-top: 100px;
+}
+
+div.card {
+    /* Use position absolute to offset them on top of each other */
+    position: absolute;
+}
+
+div.card input {
+	display: none;
+}
+
+div.card img, div.card embed {
+	width: 100px;
+	display: inherit;
+}
+
+div.card.active {
+    margin-top: -20px;
+}

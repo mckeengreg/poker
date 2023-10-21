@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Card Deck</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<form id="cardForm" action="/process" method="post">
+    	<div class="cards">
+
+	        {% for card in cards %}
+	        <div class="card" id="card-{{ card.id }}" style="left: {{30 * card.id}}px">
+	            <input type="checkbox" name="selected_cards" data-name="card-{{ card.id }}" value="{{ card.id }}">
+	            <!-- <img src="{{ url_for('static', filename='back/back.png') }}" alt="card {{card.id}}" /> -->
+	        	<embed src="{{ url_for('static', filename=card.filename) }}" type="image/svg+xml" width="100">
+	        </div>
+	        {% endfor %}
+        </div>
+        <input type="submit" value="Submit" style="display: none;">
+    </form>
+</body>
+<script src="{{ url_for('static', filename='js/card-selection.js') }}"></script>
+</html>

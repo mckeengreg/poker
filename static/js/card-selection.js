@@ -1,3 +1,6 @@
+// Call the function when the page loads
+initializeActiveCards();
+
 
 // Get the cards container
 const cardsContainer = document.querySelector('.cards');
@@ -33,3 +36,43 @@ cardsContainer.addEventListener('click', function(event) {
         submitFormAjax();
     }
 });
+
+// This function adds the 'active' class to cards with checkboxes that are already checked
+function initializeActiveCards() {
+    const checkboxes = document.querySelectorAll('.cards input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            const cardElement = checkbox.closest('.card');
+            cardElement.classList.add('active');
+        }
+    });
+    submitFormAjax();
+}
+
+
+function submitFormAjax() {
+    const formData = new FormData(cardForm);
+    const responseMessageDiv = document.getElementById('responseMessage');
+
+    fetch(cardForm.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())  // Assuming server responds with json
+    .then(data => {
+        // Update the div with the returned message
+        responseMessageDiv.textContent = data.message;
+        
+        // Optionally, you can add or remove classes based on the status to style the message
+        if (data.status === "success") {
+            responseMessageDiv.classList.add('success-message');
+            responseMessageDiv.classList.remove('error-message');
+        } else {
+            responseMessageDiv.classList.add('error-message');
+            responseMessageDiv.classList.remove('success-message');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
